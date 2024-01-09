@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const ItemSchema = new Schema({
     program:String,
     ruby:String,
-    update:String,
+    update:Date,
     image:String,
     title:String,
     text:String,
