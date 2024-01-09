@@ -103,6 +103,19 @@ app.get("/item/other",async(req,res)=>{
     }
 })
 
+//Read new date Item
+app.get("/item/newdate",async(req,res)=>{
+    try{
+        await connectDB()
+        const newdateItem = await ItemModel.find({}).sort({update:-1}).limit(5)
+        return res.status(200).json({
+            message:"アイテム読み取り成功（最新アイテム）",
+            newdateItem:newdateItem,
+        })
+    }catch(err){
+        return res.status(400).json({message:"アイテム読み取り失敗（最新アイテム）"})
+    }
+})
 
 //Read Single Item
 app.get("/item/:id",async(req,res)=>{
@@ -115,20 +128,6 @@ app.get("/item/:id",async(req,res)=>{
         })
     }catch(err){
         return res.status(400).json({message:"アイテム読み取り失敗（シングル）"})
-    }
-})
-
-//Read new date Item
-app.get("/item/newdate",async(req,res)=>{
-    try{
-        await connectDB()
-        const newdateItem = await ItemModel.find({}).sort({update:-1}).limit(5)
-        return res.status(200).json({
-            message:"アイテム読み取り成功（最新アイテム）",
-            newdateItem:newdateItem,
-        })
-    }catch(err){
-        return res.status(400).json({message:"アイテム読み取り失敗（最新アイテム）"})
     }
 })
 
