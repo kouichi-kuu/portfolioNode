@@ -1,13 +1,11 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
-const jwt = require("jsonwebtoken")
-const auth = require("./utils/auth")
-
 app.use(cors())
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
-
+const jwt = require("jsonwebtoken")
+const auth = require("./utils/auth")
 const connectDB = require("./utils/database")
 const {ItemModel,UserModel} = require("./utils/schemaModels")
 //ITEM function
@@ -133,13 +131,12 @@ app.get("/item/:id",async(req,res)=>{
 
 //Update Item
 app.put("/item/update/:id",auth,async(req,res)=>{
-    console.log(req)
     try{
         await connectDB()
         const singleItem = await ItemModel.findById(req.params.id)
         if(singleItem.email === req.body.email){
             await ItemModel.updateOne({_id:req.params.id},req.body)
-            return res.status(200).json({message:"アイテム読み取り成功（シングル）",singleItem:singleItem})
+            return res.status(200).json({message:"アイテム編集成功",singleItem:singleItem})
         }else{
             throw new Error()
         }
@@ -178,7 +175,7 @@ app.post("/user/register",async(req,res)=>{
 })
 
 //Login User
-const secret_key = "mern"
+const secret_key = "garmsvcomand"
 app.post("/user/login",async(req,res)=>{
     try{
         await connectDB()

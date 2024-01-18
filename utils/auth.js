@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const secret_key = "mern"
+const secret_key = "garmsvcomand"
 const auth = async(req,res,next)=>{
     if(req.method === "GET"){
         return next()
