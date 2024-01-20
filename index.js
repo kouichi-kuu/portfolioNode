@@ -136,7 +136,7 @@ app.put("/item/update/:id",auth,async(req,res)=>{
         const singleItem = await ItemModel.findById(req.params.id)
         if(singleItem.email === req.body.email){
             await ItemModel.updateOne({_id:req.params.id},req.body)
-            return res.status(200).json({message:"アイテム編集成功",singleItem:singleItem})
+            return res.status(200).json({message:"アイテム編集成功"})
         }else{
             throw new Error()
         }
